@@ -1,1 +1,6 @@
 feed_url: ''
+
+email_server: ''
+email_username: ''
+email_pwd: ''
+email_recipient: ''
