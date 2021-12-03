@@ -1,0 +1,4 @@
+config.yml
+*.pyc
+log/
+.idea/
