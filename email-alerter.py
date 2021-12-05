@@ -68,22 +68,56 @@ def parse_feed_for_shows(feed):
         show = [show_name, published_datetime_local, mp3_url]
         logger.debug("Adding show: {}".format(show))
         shows_to_email.append(show)
-    logger.info(shows_to_email)
+    return shows_to_email
 
 
-def send_email_with_shows():
+def send_email_with_shows(shows):
     import smtplib
+    from email.message import EmailMessage
+
+    msg = EmailMessage()
+
     email_username = config["email_username"]
     email_pwd = config["email_pwd"]
+    email_recipient = config["email_recipient"]
 
     try:
-        server = smtplib.SMTP_SSL(config['email_server'], 465)
-        server.ehlo()
-        server.login(email_username, email_pwd)
+        msg['From'] = email_username
+        msg['Subject'] = 'Links'
+        msg['To'] = email_recipient
+        shows_body = ['; '.join(show) for show in shows]
+
+        msg.set_content('plain text email')
+        msg.add_alternative(f"""\
+            <!DOCTYPE html>
+            <html>
+               <body>
+                  <p>{'<br>'.join(shows_body)}</p>
+               </body>
+            </html>
+           """, subtype='html')
+
+        with smtplib.SMTP_SSL(host=config['email_server'], port=465) as smtp:
+            smtp.ehlo()
+            smtp.login(email_username, email_pwd)
+            smtp.send_message(msg)
+
+
     except:
         logger.exception("Unable to connect to email server.")
+
+
+def create_email_body(shows):
+    text = ""
+    for show in shows:
+        for val in show:
+            text += str(val) + "; "
+        text += " <br><br>"
+
+    return text.replace("[", "").replace("]", "")
 
 
 if __name__ == "__main__":
     feed = get_feed_data()
     shows_to_email = parse_feed_for_shows(feed)
+    send_email_with_shows(shows_to_email)
