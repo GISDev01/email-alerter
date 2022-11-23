@@ -2,8 +2,8 @@ feed_url: 'https://zzz'
 playlist_url: 'https://zzz.php'
 login_url: "https://zzz.php"
 
-email_server: 'smtp.gmail.com'
-email_username: 'zzz@gmail.com'
+email_server: 'smtp.zz.com'
+email_username: 'zzz@zz.com'
 email_pwd: 'zzz'
 email_recipient: 'zzz'
 
