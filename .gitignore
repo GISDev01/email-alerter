@@ -3,3 +3,5 @@ config.yml
 log/
 .idea/
 *.cmd
+test.json
+creds.json
