@@ -1,6 +1,11 @@
-feed_url: ''
+feed_url: 'https://zzz'
+playlist_url: 'https://zzz.php'
+login_url: "https://zzz.php"
 
-email_server: ''
-email_username: ''
-email_pwd: ''
-email_recipient: ''
+email_server: 'smtp.gmail.com'
+email_username: 'zzz@gmail.com'
+email_pwd: 'zzz'
+email_recipient: 'zzz'
+
+playlist_un: "zzz"
+playlist_pw: "zzz"
